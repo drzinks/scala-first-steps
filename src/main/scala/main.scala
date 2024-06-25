@@ -74,5 +74,28 @@ def main(): Unit = {
   val evenMoreNames = moreNames.::("Justyna")
   val numbers = 1::2::3::Nil
   numbers.foreach(println)
+  mapAndForYieldExample()
+  optionTest()
 }
 
+def mapAndForYieldExample() : Unit = {
+  val adjectives:List[String] = List("One","Two","Three","Four")
+  //val adjectives = List("One","Two","Three","Four")
+
+  val nouns = adjectives.map(adj => adj + " fish.")
+  nouns.foreach(println)
+  val nouns2 =
+    for adj <- adjectives yield
+      adj + " fish, created by yield"
+    end for
+  nouns2.foreach(println)
+}
+
+def optionTest() : Unit ={
+  val adjectives = List("One","Two","Three","Four")
+//  Option[List[String]] startsWithT = adjectives.find(adj => adj.startsWith("T"))
+  val startsWithT = adjectives.find(adj => adj.startsWith("T"))
+  val startsWithC = adjectives.find(adj => adj.startsWith("C"))
+  println(startsWithT.getOrElse("None"))
+  println(startsWithC.getOrElse("None"))
+}
